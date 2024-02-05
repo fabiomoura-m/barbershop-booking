@@ -14,7 +14,6 @@ export default async function Home() {
     return (
         <div>
             <Header />
-
             <div className="px-5 pt-6">
                 <h2 className="text-xl font-bold">Olá, Fabio!</h2>
                 <p className="capitalize">
