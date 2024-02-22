@@ -100,7 +100,7 @@ const BookingItem = ({ booking }: BookingItemProps) => {
                                 {format(booking.date, 'dd')}
                             </p>
                             <p className="text-sm">
-                                {format(booking.date, 'hh:mm')}
+                                {format(booking.date, 'HH:mm')}
                             </p>
                         </div>
                     </CardContent>

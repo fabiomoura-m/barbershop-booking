@@ -1,4 +1,4 @@
-import { addMinutes, format, setHours, setMinutes } from 'date-fns';
+import { addHours, addMinutes, format, setHours, setMinutes } from 'date-fns';
 
 export function generateDayTimeList(date: Date): string[] {
     const startTime = setMinutes(setHours(date, 9), 0); // Set start time to 09:00
