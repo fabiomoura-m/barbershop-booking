@@ -9,7 +9,6 @@ import { Barbershop, Booking } from '@prisma/client';
 import { getServerSession } from 'next-auth';
 import { authOptions } from '../_lib/auth';
 
-
 export default async function Home() {
     const session = await getServerSession(authOptions);
     const barbershops: Barbershop[] = await db.barbershop.findMany({});
@@ -69,10 +68,12 @@ export default async function Home() {
 
                 <div className="flex gap-4 px-5 overflow-x-auto [&::-webkit-scrollbar]:hidden">
                     {barbershops.map(barbershop => (
-                        <BarbershopItem
-                            barbershop={barbershop}
+                        <div
                             key={barbershop.id}
-                        />
+                            className="min-w-[167px] max-w-[167px]"
+                        >
+                            <BarbershopItem barbershop={barbershop} />
+                        </div>
                     ))}
                 </div>
             </div>
@@ -84,10 +85,12 @@ export default async function Home() {
 
                 <div className="flex gap-4 px-5 overflow-x-auto [&::-webkit-scrollbar]:hidden">
                     {barbershops.map(barbershop => (
-                        <BarbershopItem
-                            barbershop={barbershop}
+                        <div
                             key={barbershop.id}
-                        />
+                            className="min-w-[167px] max-w-[167px]"
+                        >
+                            <BarbershopItem barbershop={barbershop} />
+                        </div>
                     ))}
                 </div>
             </div>
