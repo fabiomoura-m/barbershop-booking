@@ -23,6 +23,7 @@ import { Loader2 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useRouter } from 'next/navigation';
 import { getDayBookings } from '../_actions/get-day-bookings';
+import BookingInfo from '@/app/_components/booking-info';
 
 interface ServiceItemProps {
     service: Service;
@@ -71,8 +72,6 @@ const ServiceItem = ({
         if (!isAuthenticated) {
             return signIn('google');
         }
-
-        // TODO: abrir modal de agendamento
     };
 
     const handleBookingSubmit = async () => {
@@ -245,64 +244,32 @@ const ServiceItem = ({
                                     )}
 
                                     <div className="py-6 px-5 border-t border-solid border-secondary">
-                                        <Card>
-                                            <CardContent className="p-3 flex flex-col gap-3">
-                                                <div className="flex justify-between items-center">
-                                                    <h2 className="font-bold">
-                                                        {service.name}
-                                                    </h2>
-                                                    <h3 className="font-bold text-sm">
-                                                        {Intl.NumberFormat(
-                                                            'pt-BR',
-                                                            {
-                                                                style: 'currency',
-                                                                currency: 'BRL'
-                                                            }
-                                                        ).format(
-                                                            Number(
-                                                                service.price
-                                                            )
-                                                        )}
-                                                    </h3>
-                                                </div>
-
-                                                {date && (
-                                                    <div className="flex justify-between items-center">
-                                                        <h3 className="text-sm text-gray-400">
-                                                            Data
-                                                        </h3>
-                                                        <h4 className="text-sm">
-                                                            {format(
-                                                                date,
-                                                                "dd 'de' MMMM",
-                                                                { locale: ptBR }
-                                                            )}
-                                                        </h4>
-                                                    </div>
-                                                )}
-
-                                                {hour && (
-                                                    <div className="flex justify-between items-center">
-                                                        <h3 className="text-sm text-gray-400">
-                                                            Horário
-                                                        </h3>
-                                                        <h4 className="text-sm">
-                                                            {hour}
-                                                        </h4>
-                                                    </div>
-                                                )}
-
-                                                <div className="flex justify-between items-center">
-                                                    <h3 className="text-sm text-gray-400">
-                                                        Barbearia
-                                                    </h3>
-                                                    <h4 className="text-sm">
-                                                        {barbershop.name}
-                                                    </h4>
-                                                </div>
-                                            </CardContent>
-                                        </Card>
+                                        <BookingInfo
+                                            booking={{
+                                                barbershop: barbershop,
+                                                date:
+                                                    date && hour
+                                                        ? setMinutes(
+                                                              setHours(
+                                                                  date,
+                                                                  Number(
+                                                                      hour.split(
+                                                                          ':'
+                                                                      )[0]
+                                                                  )
+                                                              ),
+                                                              Number(
+                                                                  hour.split(
+                                                                      ':'
+                                                                  )[1]
+                                                              )
+                                                          )
+                                                        : undefined,
+                                                service: service
+                                            }}
+                                        />
                                     </div>
+
                                     <SheetFooter className="px-5 mt-2">
                                         <Button
                                             disabled={
